@@ -1,0 +1,103 @@
+// exports.addskill = catchAsyncError(async (req,res,next)=>{
+//     console.log(req.body.skill,"its input");
+//     const student = await studentModel.findById(req.id).exec();
+//     student.resume.skills.push({...req.body, id: uuidv4()})
+//     await student.save();
+//     res.json({ message: "skill added"});
+// })
+
+
+// exports.studentsignup = catchAsyncError(async (req, res, next) => {
+//   // Input validation (you can use a library like Joi or express-validator for this)
+//   const { username, password, email } = req.body;
+//   if (!username || !password || !email) {
+//     return res.status(400).json({ error: 'Missing required fields' });
+//   }
+
+//   try {
+//     // Hash and salt the password before saving it
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     // Create a new student instance
+//     const student = new studentModel({
+//       username,
+//       password: hashedPassword, // Save the hashed password
+//       email,
+//     });
+
+//     // Save the student to the database
+//     await student.save();
+
+//     // Send a response with a token (assuming sendtoken is a function for generating and sending tokens)
+//     sendtoken(student, 201, res);
+
+//     // Respond with the saved student data (you may choose not to include the password hash in the response)
+//     res.status(201).json({
+//       _id: student._id,
+//       username: student.username,
+//       email: student.email,
+//       // Add other relevant fields as needed
+//     });
+//   } catch (error) {
+//     // Handle any errors (e.g., duplicate username or email)
+//     if (error.code === 11000) {
+//       return res.status(400).json({ error: 'Username or email already exists' });
+//     }
+//     // Handle other unexpected errors
+//     next(error);
+//   }
+// });
+
+
+
+// exports.confirmemployee = catchAsyncError(async (req, res ,next) =>{
+  
+//   const otp = req.body.otp;
+//   const id = req.id;
+  
+
+//   const employee = await employeeModel.findById(req.id).exec();
+//   if(!employee){
+//       return next(
+//           new ErorrHandler("user Not Found With This id",404)
+//       )
+//   }
+
+
+//   if (!otp) {
+//       return next(new ErorrHandler("otp is required", 400));
+//   }
+
+//       if(employee.otp === otp){
+//          console.log("Valid Employee");
+//          res.status(200).json({
+//           message:"Password has been succesfully Changed",
+//          })
+//       }else{
+//         const employee = await employeeModel.findByIdAndDelete(req.id);
+//            console.log("Invalid Employee deleted");
+          
+//       } 
+//   // else{
+//   //     return next(
+//   //         new ErorrHandler("Invalid Reset Otp ,Please Try again",500)
+//   //     )
+//   // }
+
+  
+// })
+
+
+
+
+// exports.employeesignup = catchAsyncError( async (req,res,next)=>{
+
+//     const employee = await new employeeModel(req.body);
+//     await employee.save();
+//     sendtoken(employee,201,res)
+//     const reset_link = `${req.protocol}://localhost:3000/employee/forgotp/${employee._id}`
+//     sendmail1(req,res,next,reset_link);
+//     // await employee.save();
+//     res.status(201).json(employee);
+
+// })
